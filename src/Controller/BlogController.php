@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,7 +13,7 @@ class BlogController extends AbstractController
      */
     public function index()
     {
-        return  $this->render('blog/index.html.twig');
+        return $this->render('blog/index.html.twig');
     }
 
     /**
@@ -29,26 +30,25 @@ class BlogController extends AbstractController
     public function show(string $slug)
     {
         return $this->render('blog/show.html.twig', [
-            'slug' => $slug
+            'slug' => $slug,
         ]);
     }
-    
+
     /**
      * @Route("/edit/{id}", name="article_edit", requirements={"id"="\d+"})
      */
     public function edit(int $id)
     {
-         return $this->render('blog/edit.html.twig', [
-            'id' => $id
+        return $this->render('blog/edit.html.twig', [
+            'id' => $id,
         ]);
     }
 
-     /**
+    /**
      * @Route("/remove/{id}", name="article_remove", requirements={"id"="\d+"})
      */
     public function remove(int $id)
     {
-        return new Response('<h1>Supprimer l\'article ' .$id. '</h1>');
+        return new Response('<h1>Supprimer l\'article ' . $id . '</h1>');
     }
 }
-

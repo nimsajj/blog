@@ -1,36 +1,41 @@
 {# templates/base.html.twig #}
 <!DOCTYPE html>
 <html>
-<head>
-	<title>{% block title %}Blog{% endblock %}</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<head>
+		<title>
+			{% block title %}Blog
+			{% endblock %}
+		</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	{% block stylesheets %}
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-        <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/app.css') }}">
-	{% endblock %}
-</head>
-<body>
-	<nav>
-	    <div class="nav-wrapper">
-	    	<div class="container">
-	    		<a href="#" class="brand-logo">Blog</a>
-			      	<ul id="nav-mobile" class="right hide-on-med-and-down">
-			        <li><a href="#">Home</a></li>
-			        <li><a href="#">Login</a></li>
-		      	</ul>
-	    	</div>
-	    </div>
-  	</nav>
+		{% block stylesheets %}
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+			<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/app.css') }}">
+		{% endblock %}
+	</head>
+	<body>
+		<nav>
+			<div class="nav-wrapper">
+				<div class="container">
+					<a href="#" class="brand-logo">Blog</a>
+					<ul id="nav-mobile" class="right hide-on-med-and-down">
+						<li>
+							<a href="#">Home</a>
+						</li>
+						<li>
+							<a href="#">Login</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
 
-  	{% block content %}
+		{% block content %}{% endblock %}
 
-  	{% endblock %}
-
-	{% block scripts %}
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-	{% endblock %}
-</body>
+		{% block scripts %}
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+		{% endblock %}
+	</body>
 </html>

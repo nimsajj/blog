@@ -1,7 +1,10 @@
 {# templates/blog/add.html.twig #}
 {% extends "base.html.twig" %}
 
-{% block title %}{{ parent() }} | Ajouter un article{% endblock %}
+{% block title %}
+	{{ parent() }}
+	| Ajouter un article
+{% endblock %}
 
 {% block content %}
 	<div class="container">
@@ -10,6 +13,6 @@
 				<h4>Ajout d'un article</h4>
 			</div>
 		</div>
-	    {% include "includes/article_form.html.twig" %}
+		{% include "includes/article_form.html.twig" %}
 	</div>
 {% endblock %}
