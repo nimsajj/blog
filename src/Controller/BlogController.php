@@ -12,7 +12,7 @@ class BlogController extends AbstractController
      */
     public function index()
     {
-        return  new Response('<h1>Home page</h1>');
+        return  $this->render('blog/index.html.twig');
     }
 
     /**
@@ -20,7 +20,7 @@ class BlogController extends AbstractController
      */
     public function add()
     {
-        return new Response('<h1>Ajouter un article</h1>');
+        return $this->render('blog/add.html.twig');
     }
 
     /**
@@ -28,7 +28,9 @@ class BlogController extends AbstractController
      */
     public function show(string $slug)
     {
-        return new Response('<h1>Lire l\'article ' .$slug. '</h1>');
+        return $this->render('blog/show.html.twig', [
+            'slug' => $slug
+        ]);
     }
     
     /**
@@ -36,7 +38,9 @@ class BlogController extends AbstractController
      */
     public function edit(int $id)
     {
-        return new Response('<h1>Modifier l\'article ' .$id. '</h1>');
+         return $this->render('blog/edit.html.twig', [
+            'id' => $id
+        ]);
     }
 
      /**
