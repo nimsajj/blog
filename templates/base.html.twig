@@ -18,14 +18,20 @@
 		<nav>
 			<div class="nav-wrapper">
 				<div class="container">
-					<a href="#" class="brand-logo">Blog</a>
+					<a href="{{ path('homepage') }}" class="brand-logo">Blog</a>
 					<ul id="nav-mobile" class="right hide-on-med-and-down">
 						<li>
-							<a href="#">Home</a>
+							<a href="{{ path('homepage') }}">Home</a>
 						</li>
-						<li>
-							<a href="#">Login</a>
-						</li>
+						{% if app.user %}
+							<li>
+								<a href="{{ path('app_logout') }}">Logout</a>
+							</li>
+						{% else %}
+							<li>
+								<a href="{{ path('app_login') }}">Login</a>
+							</li>
+						{% endif %}
 					</ul>
 				</div>
 			</div>
