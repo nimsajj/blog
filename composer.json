@@ -78,6 +78,10 @@
         "symfony/polyfill-php56": "*"
     },
     "scripts": {
+        "server:start": "symfony server:start -d --no-tls",
+        "server:stop": "symfony server:stop",
+        "server:log": "symfony server:log",
+        "server:status": "symfony server:status",
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"

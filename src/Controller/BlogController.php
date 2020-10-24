@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\User;
 use App\Form\ArticleType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -18,9 +19,7 @@ class BlogController extends AbstractController
      */
     public function index()
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $articles = $em->getRepository(Article::class)->findBy(
+        $articles = $this->getDoctrine()->getRepository(Article::class)->findBy(
             ["isPublished" => true],
             ['publishedAt' => 'desc']
         );
@@ -139,5 +138,24 @@ class BlogController extends AbstractController
     public function remove(int $id)
     {
         return new Response('<h1>Supprimer l\'article ' . $id . '</h1>');
+    }
+
+
+    /**
+     * @Route("/admin", name="admin_page")
+     */
+    public function admin()
+    {
+        $articles = $this->getDoctrine()->getRepository(Article::class)->findBy(
+            [],
+            ['publishedAt' => 'desc']
+        );
+
+        $users = $this->getDoctrine()->getRepository(User::class)->findAll();
+
+        return $this->render("admin/index.html.twig", [
+            'articles' => $articles,
+            'users' => $users
+        ]);
     }
 }
