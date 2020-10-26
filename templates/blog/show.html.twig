@@ -10,7 +10,7 @@
 		<div class="row">
 			<div class="col s12 m12 l8 offset-l2">
 				<h2>{{ article.title }}</h2>
-				<span>{{ article.publishedAt|date('d/m/Y') }}</span>
+				<span>{{ article.publishedAt|date('d/m/Y H:m') }}</span>
 				{% if app.user %}
 					<p>
 						<a href="{{ path('article_edit', {'id': article.id}) }}" class="btn btn-primary">Editer</a>

@@ -34,8 +34,8 @@
 								<td>
 									<span class="new badge {{ article.isPublished ? 'blue' : 'red' }}" data-badge-caption="{{ article.isPublished ? 'oui' : 'non' }}"/>
 								</td>
-								<td>{{ article.isPublished ? article.publishedAt|date('d/m/Y') : '-' }}</td>
-								<td>{{ article.updatedAt|date('d/m/Y') }}</td>
+								<td>{{ article.isPublished ? article.publishedAt|date('d/m/Y H:m') : '-' }}</td>
+								<td>{{ article.updatedAt|date('d/m/Y H:m') }}</td>
 								<td>
 									<a href="{{ path('article_edit', {'id': article.id}) }}">
 										<i class="material-icons blue-text">edit</i>

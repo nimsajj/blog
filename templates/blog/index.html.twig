@@ -23,7 +23,7 @@
 						<h2>
 							<a href="{{ path('article_show', {'id': article.id}) }}">{{ article.title }}</a>
 						</h2>
-						<span class="date">{{ article.publishedAt|date('d/m/Y') }}</span>
+						<span class="date">{{ article.publishedAt|date('d/m/Y H:m') }}</span>
 					</div>
 				</div>
 				{% else %}
