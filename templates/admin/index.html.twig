@@ -13,6 +13,9 @@
 				<div class="col s12">
 					<a href="{{ path('article_add') }}" class="btn blue darken-4" style="float: right">Ajouter</a>
 					<h5>Articles</h5>
+					{% if articles is empty %}
+						<em>Aucun article n'a été trouvé, veuillez créer votre première article</em>
+					{% else %}
 					<table>
 						<tr>
 							<th>#</th>
@@ -41,9 +44,10 @@
 										<i class="material-icons red-text">delete</i>
 									</a>
 								</td>
-							</tr>
+							</tr>			
 						{% endfor %}
 					</table>
+					{% endif %}
 				</div>
 			</div>
 

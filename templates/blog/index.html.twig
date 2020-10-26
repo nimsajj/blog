@@ -26,6 +26,8 @@
 						<span class="date">{{ article.publishedAt|date('d/m/Y') }}</span>
 					</div>
 				</div>
+				{% else %}
+        			<em>Aucun article n'a été trouvé, veuillez créer votre première article</em>
 			{% endfor %}
 		</div>
 	</div>
