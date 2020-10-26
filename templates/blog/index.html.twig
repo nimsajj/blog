@@ -24,11 +24,6 @@
 							<a href="{{ path('article_show', {'id': article.id}) }}">{{ article.title }}</a>
 						</h2>
 						<span class="date">{{ article.publishedAt|date('d/m/Y') }}</span>
-						{% if app.user %}
-							<p>
-								<a href="{{ path('article_edit', {'id': article.id}) }}" class="btn-small btn-primary">Editer</a>
-							</p>
-						{% endif %}
 					</div>
 				</div>
 			{% endfor %}
