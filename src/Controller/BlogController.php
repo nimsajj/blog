@@ -30,11 +30,10 @@ class BlogController extends AbstractController
 
     /**
      * @Route("/add", name="article_add")
+     * @IsGranted("ROLE_USER")
      */
     public function add(Request $request, SluggerInterface $slugger)
     {
-        $this->denyAccessUnlessGranted('ROLE_USER');
-
         $article = new Article();
         $form = $this->createForm(ArticleType::class, $article);
 
@@ -67,7 +66,7 @@ class BlogController extends AbstractController
             $em->persist($article);
             $em->flush();
 
-            return new Response('Le formulaire a été enregistré');
+            return $this->redirectToRoute('homepage');
         }
 
         return $this->render('blog/add.html.twig', [
@@ -127,7 +126,7 @@ class BlogController extends AbstractController
             $em->persist($article);
             $em->flush();
 
-            return new Response('L\'article a bien été modifier.');
+            return $this->redirectToRoute('homepage');
         }
 
         return $this->render('blog/edit.html.twig', [
@@ -138,10 +137,21 @@ class BlogController extends AbstractController
 
     /**
      * @Route("/remove/{id}", name="article_remove", requirements={"id"="\d+"})
+     * @IsGranted("ROLE_USER")
      */
     public function remove(int $id)
     {
-        return new Response('<h1>Supprimer l\'article ' . $id . '</h1>');
+        $em = $this->getDoctrine()->getManager();
+
+        $article = $em->getRepository(Article::class)->findOneBy(["id" => $id]);
+
+        if (!$article) {
+            throw $this->createNotFoundException('L\'article n\'existe pas');
+        }
+
+        $em->remove($article);
+        $em->flush();
+        return $this->redirectToRoute('homepage');
     }
 
 

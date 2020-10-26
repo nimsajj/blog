@@ -24,7 +24,7 @@
 						</tr>
 						{% for article in articles %}
 							<tr>
-								<td>{{ article.id }}</td>
+								<td>{{ loop.index }}</td>
 								<td>
 									<a href="{{ path('article_show', {'id': article.id}) }}" target="_blank">{{ article.title }}</a>
 								</td>
@@ -60,7 +60,7 @@
 						</tr>
 						{% for user in users %}
 							<tr>
-								<td>{{ user.id }}</td>
+								<td>{{ loop.index }}</td>
 								<td>{{ user.email }}</td>
 								<td>{{ user.username }}</td>
 								<td>
