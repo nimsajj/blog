@@ -11,6 +11,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class BlogController extends AbstractController
 {
@@ -32,6 +33,8 @@ class BlogController extends AbstractController
      */
     public function add(Request $request, SluggerInterface $slugger)
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         $article = new Article();
         $form = $this->createForm(ArticleType::class, $article);
 
@@ -84,6 +87,7 @@ class BlogController extends AbstractController
 
     /**
      * @Route("/edit/{id}", name="article_edit", requirements={"id"="\d+"})
+     * @IsGranted("ROLE_USER")
      */
     public function edit(Article $article, Request $request, SluggerInterface $slugger)
     {
