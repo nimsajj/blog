@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use App\Service\FileUploader;
 
 class BlogController extends AbstractController
 {
@@ -32,7 +33,7 @@ class BlogController extends AbstractController
      * @Route("/add", name="article_add")
      * @IsGranted("ROLE_USER")
      */
-    public function add(Request $request, SluggerInterface $slugger)
+    public function add(Request $request, FileUploader $fileUploader)
     {
         $article = new Article();
         $form = $this->createForm(ArticleType::class, $article);
@@ -46,19 +47,7 @@ class BlogController extends AbstractController
 
             if ($article->getPicture() !== null) {
                 $file = $form->get('picture')->getData();
-                $filemanme = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-                $safeFilename = $slugger->slug($filemanme);
-                $fileName =  $safeFilename . '.' . uniqid() . '.' . $file->guessExtension();
-
-                try {
-                    $file->move(
-                        $this->getParameter('upload_directory'),
-                        $fileName
-                    );
-                } catch (FileException $e) {
-                    return new Response($e->getMessage());
-                }
-
+                $fileName = $fileUploader->upload($file);
                 $article->setPicture($fileName);
             }
 
@@ -88,7 +77,7 @@ class BlogController extends AbstractController
      * @Route("/edit/{id}", name="article_edit", requirements={"id"="\d+"})
      * @IsGranted("ROLE_USER")
      */
-    public function edit(Article $article, Request $request, SluggerInterface $slugger)
+    public function edit(Article $article, Request $request, FileUploader $fileUploader)
     {
         $oldPicture = $article->getPicture();
 
@@ -104,18 +93,7 @@ class BlogController extends AbstractController
 
             if ($article->getPicture() !== null && $article->getPicture() !== $oldPicture) {
                 $file = $form->get('picture')->getData();
-                $filemanme = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-                $safeFilename = $slugger->slug($filemanme);
-                $fileName =  $safeFilename . '.' . uniqid() . '.' . $file->guessExtension();
-
-                try {
-                    $file->move(
-                        $this->getParameter('upload_directory'),
-                        $fileName
-                    );
-                } catch (FileException $e) {
-                    return new Response($e->getMessage());
-                }
+                $fileName = $fileUploader->upload($file);
 
                 $article->setPicture($fileName);
             } else {
@@ -139,7 +117,7 @@ class BlogController extends AbstractController
      * @Route("/remove/{id}", name="article_remove", requirements={"id"="\d+"})
      * @IsGranted("ROLE_USER")
      */
-    public function remove(int $id)
+    public function remove(int $id, FileUploader $fileUploader)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -148,6 +126,8 @@ class BlogController extends AbstractController
         if (!$article) {
             throw $this->createNotFoundException('L\'article n\'existe pas');
         }
+
+        $fileUploader->remove($article->getPicture());
 
         $em->remove($article);
         $em->flush();
