@@ -23,11 +23,13 @@
 						<h2>
 							<a href="{{ path('article_show', {'id': article.id}) }}">{{ article.title }}</a>
 						</h2>
-						<span class="date">{{ article.publishedAt|date('d/m/Y H:m') }}</span>
+						{% if article.isPublished %}
+							<span class="date">{{ article.publishedAt|date('d/m/Y H:i') }}</span>
+						{% endif %}
 					</div>
 				</div>
-				{% else %}
-        			<em>Aucun article n'a été trouvé, veuillez créer votre première article</em>
+			{% else %}
+				<em>Aucun article n'a été trouvé, veuillez créer votre première article</em>
 			{% endfor %}
 		</div>
 	</div>
