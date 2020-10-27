@@ -40,6 +40,7 @@
 									<th>Contenu</th>
 									<th>Publié</th>
 									<th>Date de publication</th>
+									<th>Action</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -52,6 +53,11 @@
 										<td>{{article.content|slice(0, 50) ~ '...'}}</td>
 										<td><span class="new badge {{ article.isPublished ? 'blue' : 'red' }}" data-badge-caption="{{ article.isPublished ? 'oui' : 'non' }}"/></td>
 										<td>{{ article.isPublished ? article.publishedAt|date('d/m/Y H:i') : '-' }}</td>
+										<td>
+											<a href="{{ path('article_edit', {'id': article.id}) }}">
+												<i class="material-icons blue-text">edit</i>
+											</a>
+										</td>
 									</tr>
 								{% endfor %}
 							</tbody>
