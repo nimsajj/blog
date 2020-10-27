@@ -25,8 +25,11 @@
 							<a href="{{ path('homepage') }}">Accueil</a>
 						</li>
 						{% if app.user %}
+							<li>
+								<a href="{{ path('user_profile') }}">Profile</a>
+							</li>
 							{% if is_granted('ROLE_ADMIN') %}
-								<li>
+								<li class="red darken-2">
 									<a href="{{ path('admin_page') }}">Admin</a>
 								</li>
 							{% endif %}
