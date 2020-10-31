@@ -1,0 +1,12 @@
+{# templates/includes/comment_form.html.twig #}
+{{ form_start(form, {'attr': {'class': 'row'}}) }}
+
+<div class="input-field col col s12 m12 l8 offset-l2">
+	{{ form_widget(form.content, {'attr': {'class': 'materialize-textarea', 'placeholder': 'Saisissez votre commentaire'}}) }}
+	<span class="error">{{ form_errors(form.content) }}</span>
+</div>
+
+<div class="input-field col s12 m12 l8 offset-l2">
+	<input type="submit" name="comment_publication" value="Publier" class="btn btn-primary">
+</div>
+{{ form_end(form) }}

@@ -35,5 +35,7 @@
 				</p>
 			</div>
 		</div>
+		{% include "includes/comment_form.html.twig" %}
+		{% include "includes/comment_list.html.twig" with {'comments': article.comments} %}
 	</article>
 {% endblock %}
