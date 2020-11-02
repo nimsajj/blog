@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\Category;
 use App\Entity\Comment;
 use App\Entity\User;
 use App\Form\ArticleType;
@@ -164,9 +165,15 @@ class BlogController extends AbstractController
 
         $users = $this->getDoctrine()->getRepository(User::class)->findAll();
 
+        $categories = $this->getDoctrine()->getRepository(Category::class)->findBy(
+            [],
+            ['label' => 'asc']
+        );
+
         return $this->render("admin/index.html.twig", [
             'articles' => $articles,
-            'users' => $users
+            'users' => $users,
+            'categories' => $categories
         ]);
     }
 }
