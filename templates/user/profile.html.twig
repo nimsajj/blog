@@ -72,8 +72,35 @@
 						<blockquote>
 							Vous avez commenté aucun article
 						</blockquote>
-						{% else %}
-
+					{% else %}
+						<table>
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Article</th>
+									<th>Contenu</th>
+									<th>Date de crétation</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for comment in user.comments %}
+									<tr>
+										<td>{{loop.index}}</td>
+										<td>
+											<a href="{{ path('article_show', {'id': comment.article.id}) }}" target="_blank">{{ comment.article.title }}</a>
+										</td>
+										<td>{{comment.content}}</td>
+										<td>{{comment.createdAt|date('d/m/Y H:i')}}</td>
+										<td>
+											<a href="#">
+												<i class="material-icons red-text">remove</i>
+											</a>
+										</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
 					{% endif %}
 				</div>
 			</div>

@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col s12 m12 l8 offset-l2">
 		<h4>{{comments|length }}
-			{{ (comments|length > 0) ? 'commentaires' : 'commentaire' }}
+			{{ (comments|length > 1) ? 'commentaires' : 'commentaire' }}
 		</h4>
 		{% for comment in comments %}
 			<div>
