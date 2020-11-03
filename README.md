@@ -30,13 +30,13 @@ Create the database and lauch the migrations
   php bin/console doctrine:migrations:migrate
 ```
 
-# Load the fake data 
+## Load the fake data 
 
 ```bash
   php bin/console doctrine:fixtures:load
 ```
 
-# Additional features
+## Additional features
 
 **Note: Turial based on https://www.kaherecode.com/tutorial/creer-un-blog-avec-symfony4-partie-1
 
