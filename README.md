@@ -36,9 +36,9 @@ Create the database and lauch the migrations
   php bin/console doctrine:fixtures:load
 ```
 
-**Note: Turial based on https://www.kaherecode.com/tutorial/creer-un-blog-avec-symfony4-partie-1
-
 # Additional features
+
+**Note: Turial based on https://www.kaherecode.com/tutorial/creer-un-blog-avec-symfony4-partie-1
 
 * Finalization of crud operations
 * Adding comments and a profile page
